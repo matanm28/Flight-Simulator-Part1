@@ -5,11 +5,11 @@
 #ifndef EX3_COMMAND_H
 #define EX3_COMMAND_H
 
+#include "../baseInclude.h"
 
 class Command {
 public:
     virtual int execute() = 0;
-
     virtual ~Command() = default;
 };
 

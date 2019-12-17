@@ -3,4 +3,4 @@ project(Ex1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(ex3 Command.h main.cpp)
+add_executable(ex3 Commands/Command.h Commands/Command.cpp main.cpp Commands/OpenServerCommand.cpp Commands/OpenServerCommand.h baseInclude.h)
