@@ -5,9 +5,7 @@
 #include "Lexer.h"
 #include <stdio.h>
 #include <iostream>
-#include <fstream>
 #include <list>
-#include <algorithm>
 
 using namespace std;
 
