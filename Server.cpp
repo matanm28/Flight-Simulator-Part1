@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include "Server.h"
-
+#include "SymbolTable.h"
 
 #define PORT 8081
 

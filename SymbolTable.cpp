@@ -3,3 +3,8 @@
 //
 
 #include "SymbolTable.h"
+
+
+SymbolTable::SymbolTable() {
+
+}

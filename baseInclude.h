@@ -11,6 +11,8 @@
 #include <fstream>
 #include <list>
 #include <algorithm>
+#include <map>
+#include <hash_map>
 
 using namespace std;
 
