@@ -57,10 +57,7 @@ int Server::initServer(int argc, char const *argv[]) {
     int valread = read(client_socket, buffer, 1024);
     std::cout << buffer << std::endl;
 
-    //writing back to client
-    char *hello = "Hello, I can hear you! \n";
-    send(client_socket, hello, strlen(hello), 0);
-    std::cout << "Hello message sent\n" << std::endl;
+
     return 0;
 
 }
