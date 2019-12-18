@@ -9,20 +9,21 @@
 #include <string>
 #include <fstream>
 #include <list>
+#include <vector>
 
 using namespace std;
 
 class Lexer {
     string path;
-    list<string> commandsList;
+    vector<string> commandsList;
 public:
     Lexer(const string &path);
 
-    list<string> splitString(string source, const string &delimiter);
+    vector<string> splitString(string source, const string &delimiter);
 
     string subString(string source, string del_1, string del_2);
 
-    list<string> lexering();
+    vector<string> lexering();
 
     string getString(char x);
 

@@ -14,19 +14,6 @@ Lexer::Lexer(const string &path) : path(path) {
     this->path = path;
 }
 
-list<string> Lexer::splitString(string source, const string &delimiter) {
-    list<string> tokensList;
-    size_t pos = 0;
-    string token;
-    while ((pos = source.find(delimiter)) != std::string::npos) {
-        token = source.substr(0, pos);
-        tokensList.push_back(token);
-        source.erase(0, pos + delimiter.length());
-    }
-    tokensList.push_back(source);
-    return tokensList;
-}
-
 string Lexer::subString(string source, string del_1, string del_2) {
     size_t first, last;
     first = source.find(del_1);
@@ -40,7 +27,7 @@ string Lexer::subString(string source, string del_1, string del_2) {
     return source.substr(first + 1, last - (first + 1));
 }
 
-list<string> Lexer::lexering() {
+vector<string> Lexer::lexering() {
     ifstream in_file{this->path, ios::in};
     if (!in_file) {
         cerr << "Error - file not found";

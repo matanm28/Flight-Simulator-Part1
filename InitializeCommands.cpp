@@ -29,12 +29,10 @@ void InitializeCommands::CreateMap() {
     this->mapCommands.insert({"if", new IfCommand()});
 }
 
-void InitializeCommands::Parser(list<string> flyCommands) {
+void InitializeCommands::Parser(vector<string> flyCommands) {
     int index = 0;
     while (index < flyCommands.size()) {
-        auto iter = flyCommands.cbegin();
-        advance(iter, index);
-        Command *c = mapCommands.find(*iter)->second;
+        Command *c = mapCommands.find(flyCommands[index])->second;
         if (c != nullptr) {
             index += c->execute();
         }
