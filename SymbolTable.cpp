@@ -17,19 +17,6 @@ SymbolTable *SymbolTable::getSymbolTable() {
     return unifiedSymbolTable;
 }
 
-bool SymbolTable::updateSymboleTable(float value, int varIndex) {
-
-}
-
-bool SymbolTable::updateSymboleTable(vector<float> myNums) {
-    return false;
-}
-
-void SymbolTable::buildSimStringArray() {
-    simArr[magnetic] = string("/controls/switches/magnetos");
-    simArr[throttle] = string("/controls/engines/current-engine/throttle");
-}
-
 void SymbolTable::addVar(string varName, string sim, string direction, float value) {
     this->mapOfVar.insert({varName, new Var(value, sim, direction)});
 }
@@ -59,5 +46,14 @@ Var SymbolTable::getVar(string varName) {
     } else {
         return NULL;
     }
+}
+
+string SymbolTable::varExists(string sim) {
+    for (auto node:this->mapOfVar) {
+        if (node.second->getSim() == sim) {
+            return node.first;
+        }
+    }
+    return "";
 }
 

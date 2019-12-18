@@ -7,30 +7,56 @@
 #define IP "127.0.0.1"
 
 #include "baseInclude.h"
+#include "SymbolTable.h"
+#include "Commands/DefineVarCommand.h"
+#include <sys/socket.h>
+#include <unistd.h>
+#include <netinet/in.h>
+#include <chrono>
+
+typedef chrono::time_point<chrono::high_resolution_clock> runTime;
 
 class Server {
 private:
     int serverSocket, port, client_socket;
     // we first need to create the sockaddr obj.
     //in means IP4
-    // struct sockaddr_in address;
+    sockaddr_in address;
     string ip;
+    vector<thread *> threadVector;
+    string simArr[NUM_OF_VARS_ON_XML];
+    bool simBoolArr[NUM_OF_VARS_ON_XML] = {false};
+    bool timePassed = false;
+    runTime connectionStartTime;
 
 public:
     Server(int port);
 
+    void waitOnConnection();
+
     void intializeData();
+
+private:
+    void buildSimStringArray();
+
+    int createSocket();
+
+    bool listenAndWait();
 
     void readData();
 
-private:
-    int createSocket();
+    bool updateSymbolTable(const vector<float> &myNums);
 
-    int listenAndWait();
+    bool updateSymboleTable(float value, int varIndex);
 
-    vector<string> splitString(string source, const string &delimiter);
+    bool checkSimStatus(int index);
 
-    vector<double> convertToNums(vector<string> myVars);
+    static vector<string> splitString(string source, const string &delimiter);
+
+    vector<float> convertToNums(vector<string> myVars);
+
+public:
+    bool isTimePassed();
 
 };
 
