@@ -4,7 +4,7 @@
 
 #include "Var.h"
 
-Var::Var(int value, const string &sim, const string &direction) {
+Var::Var(float value, const string &sim, const string &direction) {
     this->value = value;
     this->sim = sim;
     this->direction = direction;
@@ -12,7 +12,19 @@ Var::Var(int value, const string &sim, const string &direction) {
 
 Var::Var(const string &sim, const string &direction) : Var(DEFAULT_VALUE, sim, direction) {}
 
-int Var::getValue() const {
+Var::Var(const Var &v) {
+    this->value = v.getValue();
+    this->sim = v.getSim();
+    this->direction = v.getDirection();
+}
+
+Var::Var(float value) {
+    this->value = value;
+    this->sim = "";
+    this->direction = "=";
+}
+
+float Var::getValue() const {
     return this->value;
 }
 
@@ -22,6 +34,10 @@ const string &Var::getSim() const {
 
 const string &Var::getDirection() const {
     return this->direction;
+}
+
+void Var::setValue(float value) {
+    Var::value = value;
 }
 
 

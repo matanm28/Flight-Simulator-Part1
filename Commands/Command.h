@@ -9,7 +9,8 @@
 
 class Command {
 public:
-    virtual int execute() = 0;
+    virtual int execute(vector<string>::iterator &iter) = 0;
+
     virtual ~Command() = default;
 };
 

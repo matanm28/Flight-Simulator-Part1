@@ -9,7 +9,7 @@
 
 class IfCommand : public ConditionParser {
 public:
-    int execute() override;
+    int execute(vector<string>::iterator &iter) override;
 
 };
 

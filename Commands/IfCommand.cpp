@@ -4,6 +4,6 @@
 
 #include "IfCommand.h"
 
-int IfCommand::execute() {
+int IfCommand::execute(vector<string>::iterator &iter) {
     return 0;
 }

@@ -3,7 +3,9 @@
 //
 
 #include "OpenServerCommand.h"
+#include <algorithm>
 
-int OpenServerCommand::execute() {
-    return 0;
+int OpenServerCommand::execute(vector<string>::iterator &iter) {
+    iter++;
+    return 2;
 }

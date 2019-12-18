@@ -11,24 +11,25 @@
 
 
 Server::Server(int port) {
+
     this->port = port;
-    this->socket = this->createSocket();
-    if (this->socket == -1 || this->socket == -2) {
-        exit(this->socket);
+    this->serverSocket = this->createSocket();
+    if (this->serverSocket == -1 || this->serverSocket == -2) {
+        exit(this->serverSocket);
     }
 
 }
 
 int Server::listenAndWait() {
     // accepting a client
-    this->client_socket = accept(this->socket, (struct sockaddr *) &this->address,
-                                 (socklen_t *) &this->address);
+//    this->client_socket = accept(this->serverSocket, (struct sockaddr *) &this->address,
+    //                               (socklen_t *) &this->address);
 
     if (this->client_socket == -1) {
         std::cerr << "Error accepting client" << std::endl;
         return -4;
     }
-    close(this->socket); //closing the listening socket
+    close(this->serverSocket); //closing the listening socket
 }
 
 void Server::intializeData() {
@@ -56,17 +57,17 @@ int Server::createSocket() {
     }
     //bind socket to IP address
     // we first need to create the sockaddr obj.
-    this->address.sin_family = AF_INET;
-    this->address.sin_addr.s_addr = INADDR_ANY; //give me any IP allocated for my mach->>>ne
-    this->address.sin_port = htons(PORT);
+//    this->address.sin_family = AF_INET;
+    //   this->address.sin_addr.s_addr = INADDR_ANY; //give me any IP allocated for my mach->>>ne
+    //   this->address.sin_port = htons(PORT);
     //we need to convert our number
     // to a number that the network understands.
 
     //the actual bind command
-    if (bind(socketfd, (struct sockaddr *) &address, sizeof(address)) == -1) {
-        std::cerr << "Could not bind the socket to an IP" << std::endl;
-        return -2;
-    }
+    //  if (bind(socketfd, (struct sockaddr *) &address, sizeof(address)) == -1) {
+    //      std::cerr << "Could not bind the socket to an IP" << std::endl;
+    //     return -2;
+    //}
     //making socket listen to the port
     if (listen(socketfd, 5) == -1) { //can also set to SOMAXCON (max connections)
         std::cerr << "Error during listening command" << std::endl;
@@ -100,4 +101,5 @@ vector<string> Server::splitString(string source, const string &delimiter) {
     }
     tokensList.push_back(source);
     return tokensList;
+
 }

@@ -7,6 +7,5 @@ int main(int argc, char *args[]) {
     Lexer lex = Lexer("../fly.txt");
     vector<string> commandsList = lex.lexering();
     InitializeCommands init;
-    init.CreateMap();
     init.Parser(commandsList);
 }

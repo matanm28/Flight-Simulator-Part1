@@ -9,7 +9,7 @@
 
 class ConditionParser : public Command {
 public:
-    virtual int execute() = 0;
+    virtual int execute(vector<string>::iterator &iter) = 0;
 };
 
 

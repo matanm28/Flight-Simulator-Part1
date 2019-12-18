@@ -10,11 +10,12 @@
 
 class Server {
 private:
-    int socket, port, client_socket;
+    int serverSocket, port, client_socket;
     // we first need to create the sockaddr obj.
     //in means IP4
-    sockaddr_in address;
+    // struct sockaddr_in address;
     string ip;
+
 public:
     Server(int port);
 
@@ -30,6 +31,7 @@ private:
     vector<string> splitString(string source, const string &delimiter);
 
     vector<double> convertToNums(vector<string> myVars);
+
 };
 
 

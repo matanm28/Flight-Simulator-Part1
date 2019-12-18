@@ -9,7 +9,7 @@
 
 class OpenServerCommand : public Command {
 public:
-    int execute() override;
+    int execute(vector<string>::iterator &iter) override;
 };
 
 

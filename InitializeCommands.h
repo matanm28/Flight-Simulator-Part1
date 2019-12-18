@@ -12,6 +12,8 @@
 class InitializeCommands {
     map<string, Command *> mapCommands;
 public:
+    InitializeCommands();
+
     void CreateMap();
 
     void Parser(vector<string> flyCommands);

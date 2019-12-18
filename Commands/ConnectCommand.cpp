@@ -3,7 +3,9 @@
 //
 
 #include "ConnectCommand.h"
+#include <algorithm>
 
-int ConnectCommand::execute() {
-    return 0;
+int ConnectCommand::execute(vector<string>::iterator &iter) {
+    advance(iter, 2);
+    return 3;
 }
