@@ -5,12 +5,12 @@ Server::Server(int port) {
     this->port = port;
     this->buildSimStringArray();
     this->serverSocket = this->createSocket();
-    if (this->serverSocket == -1 || this->serverSocket == -2) {
+    if (this->serverSocket == -1 || this->serverSocket == -2 || this->serverSocket == -3) {
         exit(this->serverSocket);
     }
 }
 
-void Server::waitOnConnection() {
+void Server::run() {
     if (this->listenAndWait()) {
         this->connectionStartTime = chrono::high_resolution_clock::now();
         thread receiveData(&Server::readData, this);
@@ -75,8 +75,10 @@ bool Server::updateSymbolTable(const vector<float> &myNums) {
 bool Server::updateSymboleTable(float value, int varIndex) {
     if (this->checkSimStatus(varIndex)) {
         //todo: add if to check if set action was successful
-        SymbolTable::getSymbolTable()->setVar(this->simArr[varIndex], value);
-    } else if (this->isTimePassed()) {
+        SymbolTable::getSymbolTable()->setVarBySim(this->simArr[varIndex], value);
+    }
+        //todo: check if needed
+    else if (this->isTimePassed()) {
         DefineVarCommand temp;
         //todo: enums names
         temp.execute("enumName", this->simArr[varIndex], "<-", value);
@@ -176,7 +178,7 @@ void Server::buildSimStringArray() {
 bool Server::isTimePassed() {
     if (!this->timePassed) {
         auto now = chrono::high_resolution_clock::now();
-        auto duration = chrono::duration_cast<chrono::minutes>(this->connectionStartTime - now);
+        auto duration = chrono::duration_cast<chrono::minutes>(now - this->connectionStartTime);
         if (duration.count() > MIN_MINUTES) {
             this->timePassed = true;
         }

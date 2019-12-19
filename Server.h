@@ -32,7 +32,7 @@ private:
 public:
     Server(int port);
 
-    void waitOnConnection();
+    void run();
 
     void intializeData();
 

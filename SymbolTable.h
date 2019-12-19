@@ -13,7 +13,8 @@ class SymbolTable {
 private:
     static SymbolTable *unifiedSymbolTable;
     mutex mutexLock;
-    map<string, Var *> mapOfVar;
+    map<string, Var *> nameToVar;
+    map<string, Var *> simToVar;
 
     SymbolTable();
 
@@ -34,7 +35,9 @@ public:
 
     void addVar(string varName, Var *var);
 
-    void setVar(string varName, float value);
+    void setVarByName(string varName, float value);
+
+    void setVarBySim(string sim, float value);
 
     Var getVar(string varName);
 
