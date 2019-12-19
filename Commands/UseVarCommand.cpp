@@ -10,10 +10,10 @@ int UseVarCommand::execute(vector<string>::iterator &iter) {
     string nameVar = *iter;
     advance(iter, 2);
     SymbolTable *st = SymbolTable::getSymbolTable();
-    //TODO: add try catch- value = 0
+    //TODO: add try catch value = 0
     float value = stof(*iter);
     //TODO: USE INTERPUTER
-    st->setVar(nameVar, value);
+    st->setVarByName(nameVar, value);
     iter++;
     return 3;
 }

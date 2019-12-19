@@ -4,6 +4,9 @@
 
 #ifndef EX1_BASEINCLUDE_H
 #define EX1_BASEINCLUDE_H
+#define NUM_OF_VARS_ON_XML 23
+#define MIN_MINUTES 2
+
 
 #include <cstdio>
 #include <iostream>
@@ -14,6 +17,7 @@
 #include <map>
 #include <hash_map>
 #include <mutex>
+#include <thread>
 
 using namespace std;
 

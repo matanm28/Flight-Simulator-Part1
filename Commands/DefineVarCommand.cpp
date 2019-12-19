@@ -29,3 +29,7 @@ int DefineVarCommand::execute(vector<string>::iterator &iter) {
         return 5;
     }
 }
+
+int DefineVarCommand::execute(const string &name, const string &sim, const string &direction, float value) {
+    SymbolTable::getSymbolTable()->addVar(name, sim, direction, value);
+}

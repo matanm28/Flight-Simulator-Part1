@@ -8,18 +8,15 @@
 #include "baseInclude.h"
 #include "Commands/Command.h"
 #include "Var.h"
-#include "Server.h"
 
 class SymbolTable {
 private:
     static SymbolTable *unifiedSymbolTable;
     mutex mutexLock;
-    string simArr[23];
-    map<string, Var *> mapOfVar;
+    map<string, Var *> nameToVar;
+    map<string, Var *> simToVar;
 
     SymbolTable();
-
-    void buildSimStringArray();
 
 public:
     static SymbolTable *getSymbolTable();
@@ -28,6 +25,8 @@ public:
 
     bool updateSymboleTable(float value, int varIndex);
 
+    //todo: change return type for adders and setters to bool
+    //upon success return true otherwise return false
     void addVar(string varName, string sim, string direction, float value);
 
     void addVar(string varName, float value);
@@ -36,9 +35,13 @@ public:
 
     void addVar(string varName, Var *var);
 
-    void setVar(string varName, float value);
+    void setVarByName(string varName, float value);
+
+    void setVarBySim(string sim, float value);
 
     Var getVar(string varName);
+
+    string varExists(string sim);
 
 
 };

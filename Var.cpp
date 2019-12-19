@@ -18,11 +18,7 @@ Var::Var(const Var &v) {
     this->direction = v.getDirection();
 }
 
-Var::Var(float value) {
-    this->value = value;
-    this->sim = "";
-    this->direction = "=";
-}
+Var::Var(float value) : Var(value, "", "=") {}
 
 float Var::getValue() const {
     return this->value;
