@@ -36,4 +36,8 @@ void Var::setValue(float value) {
     Var::value = value;
 }
 
+double Var::calculate() {
+    return this->value;
+}
+
 

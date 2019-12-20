@@ -6,6 +6,9 @@
 #define EX1_USEVARCOMMAND_H
 
 #include "Command.h"
+#include "../Interpreter/Interpreter.h"
+#include <algorithm>
+#include "../SymbolTable.h"
 
 class UseVarCommand : public Command {
 public:

@@ -38,7 +38,7 @@ void InitializeCommands::Parser(vector<string> flyCommands) {
     while (index < flyCommands.size()) {
         Command *c;
         if (mapCommands.find(flyCommands[index]) == mapCommands.cend()) {
-            c = mapCommands.find("usrVar")->second;
+            c = mapCommands.find("useVar")->second;
         } else {
             c = mapCommands.find(flyCommands[index])->second;
         }

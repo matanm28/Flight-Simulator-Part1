@@ -5,5 +5,6 @@
 #include "SleepCommand.h"
 
 int SleepCommand::execute(vector<string>::iterator &iter) {
+    iter++;
     return 2;
 }

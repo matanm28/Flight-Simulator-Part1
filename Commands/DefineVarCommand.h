@@ -10,8 +10,6 @@
 class DefineVarCommand : public Command {
 public:
     int execute(vector<string>::iterator &iter) override;
-
-    int execute(const string &name, const string &sim, const string &direction, float value);
 };
 
 

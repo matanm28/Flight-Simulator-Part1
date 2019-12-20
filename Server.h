@@ -47,7 +47,7 @@ private:
 
     bool updateSymbolTable(const vector<float> &myNums);
 
-    bool updateSymboleTable(float value, int varIndex);
+    bool updateSymbolTable(float value, int varIndex);
 
     bool checkSimStatus(int index);
 

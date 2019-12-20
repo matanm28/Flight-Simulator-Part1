@@ -6,6 +6,10 @@
 #define EX1_LOOPCOMMAND_H
 
 #include "ConditionParser.h"
+#include "../InitializeCommands.h"
+#include "../Interpreter/Interpreter.h"
+#include <algorithm>
+
 
 class LoopCommand : public ConditionParser {
 public:

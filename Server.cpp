@@ -13,9 +13,9 @@ Server::Server(int port) {
 void Server::run() {
     if (this->listenAndWait()) {
         this->connectionStartTime = chrono::high_resolution_clock::now();
-        thread receiveData(&Server::readData, this);
-        this->threadVector.push_back(&receiveData);
-        receiveData.detach();
+        // thread receiveData(&Server::readData, this);
+        // this->threadVector.push_back(&receiveData);
+        // receiveData.detach();
     }
 }
 
@@ -31,17 +31,13 @@ bool Server::listenAndWait() {
     return true;
 }
 
-void Server::intializeData() {
-
-}
-
 void Server::readData() {
     while (true) {
         //reading from client
         char buffer[1024] = {0};
         int validRead = read(this->client_socket, buffer, 1024);
         if (validRead) {
-            string source((const char *) buffer, 0);
+            string source((const char *) buffer, validRead);
             vector<string> myVars = splitString(source, ",");
             vector<float> varsNums = this->convertToNums(myVars);
             this->updateSymbolTable(varsNums);
@@ -66,13 +62,13 @@ bool Server::updateSymbolTable(const vector<float> &myNums) {
     bool flag = true;
     int index = 0;
     for (float value : myNums) {
-        flag = this->updateSymboleTable(value, index);
+        flag = this->updateSymbolTable(value, index);
         index++;
     }
     return flag;
 }
 
-bool Server::updateSymboleTable(float value, int varIndex) {
+bool Server::updateSymbolTable(float value, int varIndex) {
     if (this->checkSimStatus(varIndex)) {
         //todo: add if to check if set action was successful
         SymbolTable::getSymbolTable()->setVarBySim(this->simArr[varIndex], value);
@@ -81,7 +77,7 @@ bool Server::updateSymboleTable(float value, int varIndex) {
     else if (this->isTimePassed()) {
         DefineVarCommand temp;
         //todo: enums names
-        temp.execute("enumName", this->simArr[varIndex], "<-", value);
+        //temp.execute("enumName", this->simArr[varIndex], "<-", value);
         this->simArr[varIndex] = "enumName";
         this->simBoolArr[varIndex] = true;
     }
@@ -118,7 +114,6 @@ int Server::createSocket() {
     return socketfd;
 }
 
-}
 
 vector<float> Server::convertToNums(vector<string> myVars) {
     vector<float> myNums;

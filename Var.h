@@ -7,8 +7,9 @@
 #define DEFAULT_VALUE 0
 
 #include "baseInclude.h"
+#include "Interpreter/Expression.h"
 
-class Var {
+class Var : public Expression {
 private:
     float value;
     string sim, direction;
@@ -27,7 +28,10 @@ public:
 
     const string &getDirection() const;
 
+
     void setValue(float value);
+
+    double calculate() override;
 
 
 };

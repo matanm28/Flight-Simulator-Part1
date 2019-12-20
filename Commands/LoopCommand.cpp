@@ -3,24 +3,24 @@
 //
 
 #include "LoopCommand.h"
-#include "../InitializeCommands.h"
 
 int LoopCommand::execute(vector<string>::iterator &iter) {
-    int index = 0;
+    int index = 1;
     vector<string> loopFlyCommands;
-    iter++;
-    index++;
+    string condition = *iter;
+    Interpreter inter;
+    advance(iter, 2);
+    index += 2;
     InitializeCommands init;
-    //todo: take out loop condition
     while (*iter != "}") {
         index++;
         loopFlyCommands.push_back(*iter);
         *iter++;
     }
-    //todo: add loop control
-    while (true) {
+    while (inter.interpretCondition(condition)) {
         init.Parser(loopFlyCommands);
         break;
     }
-    return index + 1;
+    *iter++;
+    return (index + 1);
 }

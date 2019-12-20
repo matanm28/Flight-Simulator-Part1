@@ -6,6 +6,8 @@
 #define EX1_IFCOMMAND_H
 
 #include "ConditionParser.h"
+#include "../Interpreter/Interpreter.h"
+#include "../InitializeCommands.h"
 
 class IfCommand : public ConditionParser {
 public:

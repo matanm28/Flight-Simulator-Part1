@@ -1,18 +1,24 @@
 //
 // Created by sapir on 18/12/2019.
 //
-#include <algorithm>
 #include "UseVarCommand.h"
-#include "../SymbolTable.h"
 
+//[nameVar] = Expression
 int UseVarCommand::execute(vector<string>::iterator &iter) {
     iter--;
-    string nameVar = *iter;
-    advance(iter, 2);
     SymbolTable *st = SymbolTable::getSymbolTable();
-    //TODO: add try catch value = 0
-    float value = stof(*iter);
-    //TODO: USE INTERPUTER
+    string nameVar = *iter;
+    Interpreter in;
+    advance(iter, 2);
+    string strExp = *iter;
+    float value;
+    try {
+        Expression *ex = in.interpret(strExp);
+        value = ex->calculate();
+    } catch (const exception &e) {
+        *iter--;
+        value = 0;
+    }
     st->setVarByName(nameVar, value);
     iter++;
     return 3;

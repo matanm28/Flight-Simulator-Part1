@@ -36,10 +36,10 @@ vector<string> Lexer::lexering() {
     while (getline(in_file, line)) {
         this->lexLine(in_file, line);
     }
-    for (auto iter = commandsList.cbegin(); iter != commandsList.cend(); iter++) {
-        cout << "-" + *iter + "-" << endl;
-    }
-    in_file.close();
+//    for (auto iter = commandsList.cbegin(); iter != commandsList.cend(); iter++) {
+//        cout << "-" + *iter + "-" << endl;
+//    }
+//    in_file.close();
     return commandsList;
 }
 
