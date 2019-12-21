@@ -11,7 +11,7 @@ int PrintCommand::execute(vector<string>::iterator &iter) {
     } else {
         SymbolTable *st = SymbolTable::getSymbolTable();
         Var v = st->getVar(*iter);
-        //todo: check if v is val
+        //todo: check if v is null
         cout << v.getValue() << endl;
     }
     iter++;

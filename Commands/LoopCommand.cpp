@@ -19,7 +19,6 @@ int LoopCommand::execute(vector<string>::iterator &iter) {
     }
     while (inter.interpretCondition(condition)) {
         init.Parser(loopFlyCommands);
-        break;
     }
     *iter++;
     return (index + 1);

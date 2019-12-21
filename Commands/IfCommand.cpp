@@ -18,9 +18,8 @@ int IfCommand::execute(vector<string>::iterator &iter) {
         ifFlyCommands.push_back(*iter);
         *iter++;
     }
-    while (inter.interpretCondition(condition)) {
+    if (inter.interpretCondition(condition)) {
         init.Parser(ifFlyCommands);
-        break;
     }
     *iter++;
     return (index + 1);
