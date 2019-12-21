@@ -6,6 +6,7 @@
 #define EX1_PRINTCOMMAND_H
 
 #include "Command.h"
+#include <stdio.h>
 
 class PrintCommand : public Command {
 public:

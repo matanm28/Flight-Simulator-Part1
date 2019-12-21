@@ -5,6 +5,7 @@
 #ifndef EX1_SERVER_H
 #define EX1_SERVER_H
 #define IP "127.0.0.1"
+#define DEFAULT_PORT 5400
 
 #include "baseInclude.h"
 #include "SymbolTable.h"
@@ -12,7 +13,6 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <netinet/in.h>
-#include <chrono>
 
 typedef chrono::time_point<chrono::high_resolution_clock> runTime;
 
@@ -34,8 +34,6 @@ public:
 
     void run();
 
-    void intializeData();
-
 private:
     void buildSimStringArray();
 
@@ -47,7 +45,7 @@ private:
 
     bool updateSymbolTable(const vector<float> &myNums);
 
-    bool updateSymboleTable(float value, int varIndex);
+    bool updateSymbolTable(float value, int varIndex);
 
     bool checkSimStatus(int index);
 
@@ -55,14 +53,12 @@ private:
 
     vector<float> convertToNums(vector<string> myVars);
 
-public:
     bool isTimePassed();
-
 };
 
 
 enum varNames {
-    airSpeed,
+    airSpeed = 0,
     altitude,
     pressure,
     indicatedPitch,

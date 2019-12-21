@@ -12,7 +12,8 @@
 class SymbolTable {
 private:
     static SymbolTable *unifiedSymbolTable;
-    mutex mutexLock;
+    mutex simToVarLock;
+    mutex nameToVarLock;
     map<string, Var *> nameToVar;
     map<string, Var *> simToVar;
 

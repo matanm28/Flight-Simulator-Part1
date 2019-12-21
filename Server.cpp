@@ -13,46 +13,56 @@ Server::Server(int port) {
 void Server::run() {
     if (this->listenAndWait()) {
         this->connectionStartTime = chrono::high_resolution_clock::now();
-        thread receiveData(&Server::readData, this);
-        this->threadVector.push_back(&receiveData);
-        receiveData.detach();
+        thread *receiveData = new thread(&Server::readData, this);
+        this->threadVector.push_back(receiveData);
+        receiveData->detach();
+        /*this->readData();*/
     }
 }
 
 bool Server::listenAndWait() {
     // accepting a client
-    this->client_socket = accept(this->serverSocket, (struct sockaddr *) &this->address,
-                                 (socklen_t *) &this->address);
+    int addressLength = sizeof(this->address);
+    this->client_socket = accept(this->serverSocket, (struct sockaddr *) &(this->address),
+                                 (socklen_t *) &addressLength);
     if (this->client_socket == -1) {
         std::cerr << "Error accepting client" << std::endl;
         return false;
     }
+    std::cout << "Server is now connected" << std::endl;
     close(this->serverSocket); //closing the listening socket
     return true;
 }
 
-void Server::intializeData() {
-
-}
-
 void Server::readData() {
+    string data, exactData;
+    char buffer[256];
+    int validRead, pos;
     while (true) {
         //reading from client
-        char buffer[1024] = {0};
-        int validRead = read(this->client_socket, buffer, 1024);
-        if (validRead) {
-            string source((const char *) buffer, 0);
-            vector<string> myVars = splitString(source, ",");
-            vector<float> varsNums = this->convertToNums(myVars);
-            this->updateSymbolTable(varsNums);
-            std::cout << buffer << std::endl;
+        bzero(buffer, 256);
+        validRead = read(this->client_socket, buffer, 256);
+        data.append(buffer, validRead);
+        while (data.find('\n') == string::npos) {
+            int currRead = 0;
+            bzero(buffer, 256);
+            currRead = read(this->client_socket, buffer, 256);
+            validRead += currRead;
+            data.append(buffer);
         }
+        exactData = data.substr(0, data.find('\n'));
+        data.erase(0, data.find('\n') + 1);
+        vector<string> myVars = splitString(exactData, ",");
+        vector<float> varsNums = this->convertToNums(myVars);
+        this->updateSymbolTable(varsNums);
+        std::cout << exactData << std::endl;
+
     }
 }
 
 bool Server::checkSimStatus(int index) {
     if (!this->simBoolArr[index]) {
-        string key = SymbolTable::getSymbolTable()->varExists(this->simArr[index]);
+        string key;//= SymbolTable::getSymbolTable()->varExists(this->simArr[index]);
         if (!key.empty()) {
             this->simArr[index] = key;
             this->simBoolArr[index] = true;
@@ -66,25 +76,16 @@ bool Server::updateSymbolTable(const vector<float> &myNums) {
     bool flag = true;
     int index = 0;
     for (float value : myNums) {
-        flag = this->updateSymboleTable(value, index);
+        flag = this->updateSymbolTable(value, index % NUM_OF_VARS_ON_XML);
         index++;
     }
     return flag;
 }
 
-bool Server::updateSymboleTable(float value, int varIndex) {
-    if (this->checkSimStatus(varIndex)) {
-        //todo: add if to check if set action was successful
-        SymbolTable::getSymbolTable()->setVarBySim(this->simArr[varIndex], value);
-    }
-        //todo: check if needed
-    else if (this->isTimePassed()) {
-        DefineVarCommand temp;
-        //todo: enums names
-        temp.execute("enumName", this->simArr[varIndex], "<-", value);
-        this->simArr[varIndex] = "enumName";
-        this->simBoolArr[varIndex] = true;
-    }
+bool Server::updateSymbolTable(float value, int varIndex) {
+    //todo: add if to check if set action was successful
+    SymbolTable::getSymbolTable()->setVarBySim(this->simArr[varIndex], value);
+    //todo: check if needed
 }
 
 int Server::createSocket() {
@@ -116,8 +117,6 @@ int Server::createSocket() {
         std::cout << "Server is now listening ..." << std::endl;
     }
     return socketfd;
-}
-
 }
 
 vector<float> Server::convertToNums(vector<string> myVars) {

@@ -5,5 +5,6 @@
 #include "PrintCommand.h"
 
 int PrintCommand::execute(vector<string>::iterator &iter) {
+
     return 2;
 }
