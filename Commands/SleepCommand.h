@@ -6,6 +6,7 @@
 #define EX1_SLEEPCOMMAND_H
 
 #include "Command.h"
+#include "../baseInclude.h"
 
 class SleepCommand : public Command {
 public:

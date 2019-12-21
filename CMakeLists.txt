@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(Ex1)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS -pthread)
 
 add_executable(ex3 Commands/Command.h Commands/Command.cpp Commands/OpenServerCommand.h Commands/OpenServerCommand.cpp main.cpp Lexer.cpp Lexer.h SymbolTable.cpp SymbolTable.h InitializeCommands.cpp InitializeCommands.h Commands/ConnectCommand.cpp Commands/ConnectCommand.h Commands/DefineVarCommand.cpp Commands/DefineVarCommand.h Commands/PrintCommand.cpp Commands/PrintCommand.h Commands/SleepCommand.cpp Commands/SleepCommand.h Commands/ConditionParser.h Commands/IfCommand.cpp Commands/IfCommand.h Commands/LoopCommand.cpp Commands/LoopCommand.h Var.cpp Var.h Server.cpp Server.h Commands/UseVarCommand.cpp Commands/UseVarCommand.h Interpreter/Variable.h Interpreter/Variable.cpp Interpreter/Value.cpp Interpreter/Value.h Interpreter/BinaryOperator.cpp Interpreter/BinaryOperator.h Interpreter/Plus.cpp Interpreter/Plus.h Interpreter/Minus.cpp Interpreter/Minus.h Interpreter/Mul.cpp Interpreter/Mul.h Interpreter/Div.cpp Interpreter/Div.h Interpreter/UPlus.cpp Interpreter/UPlus.h Interpreter/UnaryOperator.cpp Interpreter/UnaryOperator.h Interpreter/UMinus.cpp Interpreter/UMinus.h Interpreter/Interpreter.cpp Interpreter/Interpreter.h Interpreter/ex1.h Interpreter/ex1.cpp)

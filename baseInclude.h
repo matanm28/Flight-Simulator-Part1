@@ -18,6 +18,9 @@
 #include <hash_map>
 #include <mutex>
 #include <thread>
+#include <strings.h>
+#include <chrono>
+
 
 using namespace std;
 

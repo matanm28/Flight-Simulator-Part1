@@ -11,7 +11,7 @@ SymbolTable::SymbolTable() {
 }
 
 SymbolTable *SymbolTable::getSymbolTable() {
-    if (!unifiedSymbolTable) {
+    if (unifiedSymbolTable == nullptr) {
         unifiedSymbolTable = new SymbolTable();
     }
     return unifiedSymbolTable;
@@ -19,53 +19,73 @@ SymbolTable *SymbolTable::getSymbolTable() {
 
 void SymbolTable::addVar(string varName, string sim, string direction, float value) {
     Var *var = new Var(value, sim, direction);
+    this->nameToVarLock.lock();
     this->nameToVar.insert({varName, var});
+    this->nameToVarLock.unlock();
+    this->simToVarLock.lock();
     this->simToVar.insert({sim, var});
+    this->simToVarLock.unlock();
+
 }
 
 void SymbolTable::addVar(string varName, string sim, string direction) {
     this->addVar(varName, sim, direction, DEFAULT_VALUE);
+
 }
 
 void SymbolTable::addVar(string varName, float value) {
     Var *var = new Var(value);
+    this->nameToVarLock.lock();
     this->nameToVar.insert({varName, var});
+    this->nameToVarLock.unlock();
 }
 
 //todo: maybe delete?
 void SymbolTable::addVar(string varName, Var *var) {
+    this->nameToVarLock.lock();
     this->nameToVar.insert({varName, var});
     this->simToVar.insert({var->getSim(), var});
+    this->nameToVarLock.unlock();
 }
 
 
 void SymbolTable::setVarByName(string varName, float value) {
-    this->mutexLock.lock();
-    this->nameToVar.find(varName)->second->setValue(value);
-    this->mutexLock.unlock();
+    this->nameToVarLock.lock();
+    if (this->nameToVar.find(varName) != this->nameToVar.cend()) {
+        this->nameToVar.find(varName)->second->setValue(value);
+    }
+    this->nameToVarLock.unlock();
 }
 
 void SymbolTable::setVarBySim(string sim, float value) {
-    this->mutexLock.lock();
-    this->simToVar.find(sim)->second->setValue(value);
-    this->mutexLock.unlock();
+    if (this->simToVar.find(sim) != this->simToVar.cend()) {
+        this->simToVarLock.lock();
+        this->simToVar.find(sim)->second->setValue(value);
+        this->simToVarLock.unlock();
+    }
 }
 
 
 Var SymbolTable::getVar(string varName) {
+    this->nameToVarLock.lock();
     if (this->nameToVar.find(varName) != this->nameToVar.cend()) {
+        this->nameToVarLock.unlock();
         return *this->nameToVar.find(varName)->second;
     } else {
+        this->nameToVarLock.unlock();
         return NULL;
     }
 }
 
 string SymbolTable::varExists(string sim) {
+    this->simToVarLock.lock();
     for (auto node:this->nameToVar) {
         if (node.second->getSim() == sim) {
+            this->nameToVarLock.unlock();
             return node.first;
         }
     }
+    this->simToVarLock.unlock();
     return "";
 }
 
