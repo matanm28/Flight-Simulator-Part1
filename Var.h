@@ -13,6 +13,7 @@ class Var : public Expression {
 private:
     float value;
     string sim, direction;
+    bool newValue = false;
 public:
     Var(float value, const string &sim, const string &direction);
 
@@ -28,10 +29,13 @@ public:
 
     const string &getDirection() const;
 
+    bool hasNewValue() const;
 
     void setValue(float value);
 
     double calculate() override;
+
+    void valueUsed();
 
 
 };

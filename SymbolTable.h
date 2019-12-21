@@ -8,6 +8,7 @@
 #include "baseInclude.h"
 #include "Commands/Command.h"
 #include "Var.h"
+#include "Client.h"
 
 class SymbolTable {
 private:
@@ -22,10 +23,6 @@ private:
 public:
     static SymbolTable *getSymbolTable();
 
-    bool updateSymboleTable(vector<float> myNums);
-
-    bool updateSymboleTable(float value, int varIndex);
-
     //todo: change return type for adders and setters to bool
     //upon success return true otherwise return false
     void addVar(string varName, string sim, string direction, float value);
@@ -34,11 +31,11 @@ public:
 
     void addVar(string varName, string sim, string direction);
 
-    void addVar(string varName, Var *var);
-
     void setVarByName(string varName, float value);
 
     void setVarBySim(string sim, float value);
+
+    vector<Var *> getNameToVar();
 
     Var getVar(string varName);
 

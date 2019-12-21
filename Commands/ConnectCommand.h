@@ -6,6 +6,7 @@
 #define EX1_CONNECTCOMMAND_H
 
 #include "Command.h"
+#include "../Client.h"
 
 class ConnectCommand : public Command {
 public:

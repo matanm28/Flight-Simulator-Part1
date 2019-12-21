@@ -17,7 +17,7 @@ Lexer::Lexer(const string &path) : path(path) {
 string Lexer::subString(string source, string del_1, string del_2) {
     size_t first, last;
     first = source.find(del_1);
-    last = source.find(del_2);
+    last = source.find(del_2, first + 1);
     if (del_2 == "") {
         last = source.length() + 1;
     }
@@ -56,7 +56,8 @@ void Lexer::lexLine(ifstream &in_file, string line) {
         commandsList.push_back(subString(line, "(", ")"));
     } else if (line.find("connectControlClient") != string::npos) {
         commandsList.push_back("connectControlClient");
-        commandsList.push_back(subString(line, "(", ","));
+        //todo: get sim without '"'
+        commandsList.push_back(subString(subString(line, "(", ","), "\"", "\""));
         commandsList.push_back(subString(line, ",", ")"));
     } else if (line.find("var ") != string::npos) {
         commandsList.push_back("var");
@@ -69,7 +70,7 @@ void Lexer::lexLine(ifstream &in_file, string line) {
             }
             commandsList.push_back("<-");
             commandsList.push_back("sim");
-            commandsList.push_back(subString(line, "(", ")"));
+            commandsList.push_back(subString(subString(line, "(", ","), "\"", "\""));
         } else if (line.find("->") != string::npos) {
             if (line.find("->") > line.find(" ")) {
                 commandsList.push_back(subString(line, "", " "));
@@ -78,7 +79,7 @@ void Lexer::lexLine(ifstream &in_file, string line) {
             }
             commandsList.push_back("->");
             commandsList.push_back("sim");
-            commandsList.push_back(subString(line, "(", ")"));
+            commandsList.push_back(subString(subString(line, "(", ","), "\"", "\""));
         } else if (line.find('=') != string::npos) {
             if (line.find("=") > line.find(" ")) {
                 commandsList.push_back(subString(line, "", " "));

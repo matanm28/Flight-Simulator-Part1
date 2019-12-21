@@ -40,14 +40,6 @@ void SymbolTable::addVar(string varName, float value) {
     this->nameToVarLock.unlock();
 }
 
-//todo: maybe delete?
-void SymbolTable::addVar(string varName, Var *var) {
-    this->nameToVarLock.lock();
-    this->nameToVar.insert({varName, var});
-    this->simToVar.insert({var->getSim(), var});
-    this->nameToVarLock.unlock();
-}
-
 
 void SymbolTable::setVarByName(string varName, float value) {
     this->nameToVarLock.lock();
@@ -90,4 +82,15 @@ string SymbolTable::varExists(string sim) {
     this->simToVarLock.unlock();
     return "";
 }
+
+vector<Var *> SymbolTable::getNameToVar() {
+    vector<Var *> varVector;
+    for (auto node : this->nameToVar) {
+        varVector.push_back(node.second);
+    }
+    return varVector;
+}
+
+
+
 

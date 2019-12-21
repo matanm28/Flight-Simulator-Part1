@@ -22,7 +22,6 @@ private:
     // we first need to create the sockaddr obj.
     //in means IP4
     sockaddr_in address;
-    string ip;
     vector<thread *> threadVector;
     string simArr[NUM_OF_VARS_ON_XML];
     bool simBoolArr[NUM_OF_VARS_ON_XML] = {false};

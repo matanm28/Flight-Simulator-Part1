@@ -30,7 +30,7 @@ int DefineVarCommand::execute(vector<string>::iterator &iter) {
         }
         //calculate the expression
         iter++;
-        return 3;
+        return 4;
     } else { //var [nameVar] = sim -> " " or [nameVar] = sim <- " "
         direction = *iter;
         advance(iter, 2);

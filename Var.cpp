@@ -8,14 +8,15 @@ Var::Var(float value, const string &sim, const string &direction) {
     this->value = value;
     this->sim = sim;
     this->direction = direction;
+    if (this->direction == "->") {
+        this->newValue = true;
+    }
 }
 
 Var::Var(const string &sim, const string &direction) : Var(DEFAULT_VALUE, sim, direction) {}
 
-Var::Var(const Var &v) {
-    this->value = v.getValue();
-    this->sim = v.getSim();
-    this->direction = v.getDirection();
+Var::Var(const Var &v) : Var(v.value, v.sim, v.direction) {
+
 }
 
 Var::Var(float value) : Var(value, "", "=") {}
@@ -34,10 +35,19 @@ const string &Var::getDirection() const {
 
 void Var::setValue(float value) {
     Var::value = value;
+    this->newValue = true;
 }
 
 double Var::calculate() {
     return this->value;
+}
+
+bool Var::hasNewValue() const {
+    return this->newValue;
+}
+
+void Var::valueUsed() {
+    this->newValue = false;
 }
 
 

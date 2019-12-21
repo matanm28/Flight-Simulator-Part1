@@ -3,9 +3,14 @@
 //
 
 #include "ConnectCommand.h"
-#include <algorithm>
+
 
 int ConnectCommand::execute(vector<string>::iterator &iter) {
-    advance(iter, 2);
+    string ip = *iter;
+    iter++;
+    int port = stoi(*iter);
+    Client *client = new Client(ip, port);
+    client->runClient();
+    iter++;
     return 3;
 }

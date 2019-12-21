@@ -208,7 +208,7 @@ bool Interpreter::charIsVar(const char c) {
 }
 
 bool Interpreter::charIsOperator(const char c) {
-    return !(charIsNumber(c) || charIsVar(c) || c == R_BRACKET);
+    return !(charIsNumber(c) || charIsVar(c) || c == R_BRACKET || c == ' ');
 }
 
 bool Interpreter::isNumber(const string str) {
