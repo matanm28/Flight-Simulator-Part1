@@ -37,12 +37,16 @@ void Client::runClient() {
 
 bool Client::establishConnection() {
     int addressLength = sizeof(this->address);
-    int is_connect = connect(this->clientSocket, (struct sockaddr *) &(this->address), (socklen_t) addressLength);
-    if (is_connect == -1) {
-        std::cerr << "Could not connect to host server" << std::endl;
-        return false;
-    } else {
-        std::cout << "Client is now connected to server" << std::endl;
+    bool connectionEstablished = false;
+    //todo: add time dependency
+    while (!connectionEstablished) {
+        int is_connect = connect(this->clientSocket, (struct sockaddr *) &(this->address), (socklen_t) addressLength);
+        if (is_connect == -1) {
+            std::cerr << "Could not connect to host server" << std::endl;
+        } else {
+            std::cout << "Client is now connected to server" << std::endl;
+            connectionEstablished = true;
+        }
     }
     return true;
 }
@@ -55,7 +59,7 @@ void Client::sendData() {
             if (is_sent == -1) {
                 std::cout << "Error sending message" << std::endl;
             } else {
-                std::cout << data + " sent to server" << std::endl;
+                std::cout << data.substr(0, data.find('\r')) + " sent to server" << std::endl;
             }
         }
     }

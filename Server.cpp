@@ -55,7 +55,7 @@ void Server::readData() {
         vector<string> myVars = splitString(exactData, ",");
         vector<float> varsNums = this->convertToNums(myVars);
         this->updateSymbolTable(varsNums);
-        std::cout << exactData << std::endl;
+        //std::cout << exactData << std::endl;
 
     }
 }
