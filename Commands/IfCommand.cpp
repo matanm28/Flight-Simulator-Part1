@@ -11,15 +11,14 @@ int IfCommand::execute(vector<string>::iterator &iter) {
     Interpreter inter;
     advance(iter, 2);
     index += 2;
-    InitializeCommands init;
-
+    Parser init;
     while (*iter != "}") {
         index++;
         ifFlyCommands.push_back(*iter);
         *iter++;
     }
     if (inter.interpretCondition(condition)) {
-        init.Parser(ifFlyCommands);
+        init.Parse(ifFlyCommands);
     }
     *iter++;
     return (index + 1);

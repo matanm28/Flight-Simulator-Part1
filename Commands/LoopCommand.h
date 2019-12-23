@@ -6,7 +6,7 @@
 #define EX1_LOOPCOMMAND_H
 
 #include "ConditionParser.h"
-#include "../InitializeCommands.h"
+#include "../Parser.h"
 #include "../Interpreter/Interpreter.h"
 #include <algorithm>
 

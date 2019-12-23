@@ -11,14 +11,14 @@ int LoopCommand::execute(vector<string>::iterator &iter) {
     Interpreter inter;
     advance(iter, 2);
     index += 2;
-    InitializeCommands init;
+    Parser init;
     while (*iter != "}") {
         index++;
         loopFlyCommands.push_back(*iter);
         *iter++;
     }
     while (inter.interpretCondition(condition)) {
-        init.Parser(loopFlyCommands);
+        init.Parse(loopFlyCommands);
     }
     *iter++;
     return (index + 1);

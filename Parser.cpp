@@ -2,7 +2,7 @@
 // Created by sapir on 17/12/2019.
 //
 
-#include "InitializeCommands.h"
+#include "Parser.h"
 #include "Commands/OpenServerCommand.h"
 #include "Commands/ConnectCommand.h"
 #include "Commands/DefineVarCommand.h"
@@ -21,7 +21,7 @@
 
 using namespace std;
 
-InitializeCommands::InitializeCommands() {
+Parser::Parser() {
     this->mapCommands.insert({"openDataServer", new OpenServerCommand()});
     this->mapCommands.insert({"connectControlClient", new ConnectCommand()});
     this->mapCommands.insert({"var", new DefineVarCommand()});
@@ -32,7 +32,7 @@ InitializeCommands::InitializeCommands() {
     this->mapCommands.insert({"if", new IfCommand()});
 }
 
-void InitializeCommands::Parser(vector<string> flyCommands) {
+void Parser::Parse(vector<string> flyCommands) {
     int index = 0;
     auto iter = flyCommands.begin();
     while (index < flyCommands.size()) {

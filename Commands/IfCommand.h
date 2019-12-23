@@ -7,7 +7,7 @@
 
 #include "ConditionParser.h"
 #include "../Interpreter/Interpreter.h"
-#include "../InitializeCommands.h"
+#include "../Parser.h"
 
 class IfCommand : public ConditionParser {
 public:
