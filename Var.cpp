@@ -32,7 +32,9 @@ const string &Var::getDirection() const {
 
 void Var::setValue(float value) {
     Var::value = value;
-    this->newValue = true;
+    if (this->direction == "->") {
+        this->newValue = true;
+    }
 }
 
 double Var::calculate() {

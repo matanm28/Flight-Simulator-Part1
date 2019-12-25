@@ -53,13 +53,13 @@ void SymbolTable::setVarByName(string varName, float value) {
 }
 
 void SymbolTable::setVarBySim(string sim, float value) {
+    this->simToVarLock.lock();
     if (this->simToVar.find(sim) != this->simToVar.cend()) {
-        this->simToVarLock.lock();
         if (this->simToVar.find(sim)->second->getDirection() == "<-") {
             this->simToVar.find(sim)->second->setValue(value);
         }
-        this->simToVarLock.unlock();
     }
+    this->simToVarLock.unlock();
 }
 
 

@@ -6,6 +6,7 @@
 #define EX1_SERVER_H
 #define IP "127.0.0.1"
 #define DEFAULT_PORT 5400
+#define BUFFER_SIZE 256
 
 #include "baseInclude.h"
 #include "SymbolTable.h"
@@ -74,7 +75,7 @@ enum varNames {
     magnetic_compass_indicated_heading,
     indicated_slip_skid,
     indicated_turn_rate,
-    vertical_speed_indicator_indicated_speed,
+    vertical_speed,
     flight_aileron,
     flight_elevator,
     flight_rudder,

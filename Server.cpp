@@ -34,19 +34,19 @@ bool Server::listenAndWait() {
 }
 
 void Server::readData() {
-    string data, exactData;
-    char buffer[256];
+    string data, exactData, prevData;
+    char buffer[BUFFER_SIZE];
     int validRead;
     //this->flushBuffer();
     while (true) {
         //reading from client
-        bzero(buffer, 256);
-        validRead = read(this->client_socket, buffer, 256);
+        bzero(buffer, BUFFER_SIZE);
+        validRead = read(this->client_socket, buffer, BUFFER_SIZE);
         data.append(buffer, validRead);
         while (data.find('\n') == string::npos) {
             int currRead = 0;
-            bzero(buffer, 256);
-            currRead = read(this->client_socket, buffer, 256);
+            bzero(buffer, BUFFER_SIZE);
+            currRead = read(this->client_socket, buffer, BUFFER_SIZE);
             validRead += currRead;
             data.append(buffer, currRead);
         }
@@ -55,6 +55,10 @@ void Server::readData() {
         vector<string> myVars = splitString(exactData, ",");
         vector<float> varsNums = this->convertToNums(myVars);
         this->updateSymbolTable(varsNums);
+        /*prevData = exactData;
+        while (prevData == data.substr(0, data.find('\n'))){
+            data.erase(0, data.find('\n') + 1);
+        }*/
         //std::cout << exactData << std::endl;
 
     }
@@ -166,8 +170,7 @@ void Server::buildSimStringArray() {
     simArr[magnetic_compass_indicated_heading] = string("/instrumentation/magnetic-compass/indicated-heading-deg");
     simArr[indicated_slip_skid] = string("/instrumentation/slip-skid-ball/indicated-slip-skid");
     simArr[indicated_turn_rate] = string("/instrumentation/turn-indicator/indicated-turn-rate");
-    simArr[vertical_speed_indicator_indicated_speed] = string(
-            "/instrumentation/vertical-speed-indicator/indicated-speed-fpm");
+    simArr[vertical_speed] = string("/instrumentation/vertical-speed-indicator/indicated-speed-fpm");
     simArr[flight_aileron] = string("/controls/flight/aileron");
     simArr[flight_elevator] = string("/controls/flight/elevator");
     simArr[flight_rudder] = string("/controls/flight/rudder");
