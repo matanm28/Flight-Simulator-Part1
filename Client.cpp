@@ -36,8 +36,9 @@ void Client::runClient() {
 bool Client::establishConnection() {
     int addressLength = sizeof(this->address);
     bool connectionEstablished = false, reportError = true;
+    this->firstConnectionStartTime = chrono::high_resolution_clock::now();
     //todo: add time dependency
-    while (!connectionEstablished) {
+    while (!(connectionEstablished || this->getTimePassed())) {
         int is_connect = connect(this->clientSocket, (struct sockaddr *) &(this->address), (socklen_t) addressLength);
         if (is_connect == -1) {
             if (reportError) {
@@ -46,9 +47,12 @@ bool Client::establishConnection() {
             }
         } else {
             std::cout << "Client is now connected to server" << std::endl;
-            this->firstConnectionStartTime =
             connectionEstablished = true;
         }
+    }
+    if (this->timePassed) {
+        std::cerr << "Timeout on client connection" << std::endl;
+        return false;
     }
     return true;
 }
@@ -84,13 +88,15 @@ string Client::turnVarToData(Var *var) {
     return data;
 }
 
-bool Client::isTimePassed() {
-    if (!this->timePassed) {
-        auto now = chrono::high_resolution_clock::now();
-        auto duration = chrono::duration_cast<chrono::minutes>(now - this->connectionStartTime);
-        if (duration.count() > MIN_MINUTES) {
-            this->timePassed = true;
-        }
+void Client::isTimePassed() {
+    auto now = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::seconds>(now - this->firstConnectionStartTime);
+    if (duration.count() > MAX_SECONDS_FOR_CONNECTION) {
+        this->timePassed = true;
     }
+}
+
+bool Client::getTimePassed() {
+    this->isTimePassed();
     return this->timePassed;
 }

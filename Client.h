@@ -44,7 +44,9 @@ private:
 
     static vector<string> createCommandsVector();
 
-    bool isTimePassed();
+    void isTimePassed();
+
+    bool getTimePassed();
 };
 
 

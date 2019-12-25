@@ -47,6 +47,9 @@ void SymbolTable::setVarByName(string varName, float value) {
         this->nameToVar.find(varName)->second->setValue(value);
     }
     this->nameToVarLock.unlock();
+    if (!this->guiStarted) {
+        this->guiStarted = true;
+    }
 }
 
 void SymbolTable::setVarBySim(string sim, float value) {
@@ -71,6 +74,17 @@ Var SymbolTable::getVar(string varName) {
     }
 }
 
+Var SymbolTable::getVarBySim(string sim) {
+    this->simToVarLock.lock();
+    if (this->nameToVar.find(sim) != this->nameToVar.cend()) {
+        this->simToVarLock.unlock();
+        return *this->simToVar.find(sim)->second;
+    } else {
+        this->simToVarLock.unlock();
+        return NULL;
+    }
+}
+
 string SymbolTable::varExists(string sim) {
     this->simToVarLock.lock();
     for (auto node:this->nameToVar) {
@@ -91,5 +105,8 @@ vector<Var *> SymbolTable::getNameToVar() {
     return varVector;
 }
 
+bool SymbolTable::getGuiStarted() {
+    return this->guiStarted;
+}
 
 

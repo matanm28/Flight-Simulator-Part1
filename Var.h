@@ -15,6 +15,7 @@ private:
     string sim, direction;
     bool newValue = false;
 public:
+
     Var(float value, const string &sim, const string &direction);
 
     Var(const string &sim, const string &direction);

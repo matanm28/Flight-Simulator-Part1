@@ -37,6 +37,7 @@ void Server::readData() {
     string data, exactData;
     char buffer[256];
     int validRead;
+    //this->flushBuffer();
     while (true) {
         //reading from client
         bzero(buffer, 256);
@@ -133,6 +134,16 @@ vector<string> Server::splitString(string source, const string &delimiter) {
     tokensList.push_back(source);
     return tokensList;
 
+}
+
+void Server::flushBuffer() {
+    char buffer[2048];
+    int valRead = 2048;
+    while (!SymbolTable::getSymbolTable()->getGuiStarted() ||
+           SymbolTable::getSymbolTable()->getVarBySim(this->simArr[engine_rpm]).getValue() < 750) {
+        //reading from client and not using
+        valRead = read(this->client_socket, buffer, 2048);
+    }
 }
 
 void Server::buildSimStringArray() {

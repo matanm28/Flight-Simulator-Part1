@@ -8,9 +8,6 @@ Var::Var(float value, const string &sim, const string &direction) {
     this->value = value;
     this->sim = sim;
     this->direction = direction;
-    if (this->direction == "->") {
-        this->newValue = true;
-    }
 }
 
 Var::Var(const string &sim, const string &direction) : Var(DEFAULT_VALUE, sim, direction) {}

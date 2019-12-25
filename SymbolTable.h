@@ -17,6 +17,7 @@ private:
     mutex nameToVarLock;
     map<string, Var *> nameToVar;
     map<string, Var *> simToVar;
+    bool guiStarted = false;
 
     SymbolTable();
 
@@ -39,7 +40,11 @@ public:
 
     Var getVar(string varName);
 
+    Var getVarBySim(string sim);
+
     string varExists(string sim);
+
+    bool getGuiStarted();
 
 
 };

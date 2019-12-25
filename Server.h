@@ -49,6 +49,8 @@ private:
     static vector<string> splitString(string source, const string &delimiter);
 
     vector<float> convertToNums(vector<string> myVars);
+
+    void flushBuffer();
 };
 
 
