@@ -31,6 +31,12 @@ public:
 
     void lexLine(ifstream &in_file, string line);
 
+    bool funcOrNot(string source);
+
+    string eraseParameters(string source);
+
+    void func(ifstream &in_file, string line);
+
 private:
     string trimChar(string source, const char c);
 };

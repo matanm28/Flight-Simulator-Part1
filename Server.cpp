@@ -149,29 +149,43 @@ vector<string> Server::splitString(string source, const string &delimiter) {
 }
 
 void Server::buildSimStringArray() {
-    simArr[airSpeed] = string("/instrumentation/airspeed-indicator/indicated-speed-kt");
-    simArr[altitude] = string("/instrumentation/altimeter/indicated-altitude-ft");
-    simArr[pressure] = string("/instrumentation/altimeter/pressure-alt-ft");
-    simArr[indicatedPitch] = string("/instrumentation/attitude-indicator/indicated-pitch-deg");
-    simArr[roll] = string("/instrumentation/attitude-indicator/indicated-roll-deg");
-    simArr[internalPitch] = string("/instrumentation/attitude-indicator/internal-pitch-deg");
-    simArr[internalRoll] = string("/instrumentation/attitude-indicator/internal-roll-deg");
-    simArr[indicatedAltitude] = string("/instrumentation/encoder/indicated-altitude-ft");
-    simArr[presureAlt] = string("/instrumentation/encoder/pressure-alt-ft");
-    simArr[gpsAltitude] = string("/instrumentation/gps/indicated-altitude-ft");
-    simArr[gpsGroundSpeed] = string("/instrumentation/gps/indicated-ground-speed-kt");
-    simArr[gpsVerticalSpeed] = string("/instrumentation/gps/indicated-vertical-speed");
-    simArr[headingDeg] = string("/instrumentation/heading-indicator/indicated-heading-deg");
-    simArr[magnetic] = string("/instrumentation/magnetic-compass/indicated-heading-deg");
-    simArr[slipSkid] = string("/instrumentation/slip-skid-ball/indicated-slip-skid");
-    simArr[turnRate] = string("/instrumentation/turn-indicator/indicated-turn-rate");
-    simArr[indicatedVerticalSpeed] = string("/instrumentation/vertical-speed-indicator/indicated-speed-fpm");
-    simArr[aileron] = string("/controls/flight/aileron");
-    simArr[elevator] = string("/controls/flight/elevator");
-    simArr[rudder] = string("/controls/flight/rudder");
-    simArr[flaps] = string("/controls/flight/flaps");
-    simArr[throttle] = string("/controls/engines/current-engine/throttle");
-    simArr[engineRpm] = string("/engines/engine/rpm");
+    simArr[airspeed_indicator] = string("/instrumentation/airspeed-indicator/indicated-speed-kt");
+    simArr[time_warp] = string("/sim/time/warp");
+    simArr[switches_magnetos] = string("/controls/switches/magnetos");
+    simArr[heading_indicator] = string("/instrumentation/heading-indicator/offset-deg");
+    simArr[altimeter_indicated_altitude] = string("/instrumentation/altimeter/indicated-altitude-ft");
+    simArr[altimeter_pressure_alt] = string("/instrumentation/altimeter/pressure-alt-ft");
+    simArr[attitude_indicator_indicated_pitch] = string("/instrumentation/attitude-indicator/indicated-pitch-deg");
+    simArr[attitude_indicator_indicated_roll] = string("/instrumentation/attitude-indicator/indicated-roll-deg");
+    simArr[attitude_indicator_internal_pitch] = string("/instrumentation/attitude-indicator/internal-pitch-deg");
+    simArr[attitude_indicator_internal_roll] = string("/instrumentation/attitude-indicator/internal-roll-deg");
+    simArr[encoder_indicated_altitude] = string("/instrumentation/encoder/indicated-altitude-ft");
+    simArr[encoder_pressure_alt] = string("/instrumentation/encoder/pressure-alt-ft");
+    simArr[gps_indicated_altitude] = string("/instrumentation/gps/indicated-altitude-ft");
+    simArr[gps_indicated_ground_speed] = string("/instrumentation/gps/indicated-ground-speed-kt");
+    simArr[gps_indicated_vertical_speed] = string("/instrumentation/gps/indicated-vertical-speed");
+    simArr[indicated_heading] = string("/instrumentation/heading-indicator/indicated-heading-deg");
+    simArr[magnetic_compass_indicated_heading] = string("/instrumentation/magnetic-compass/indicated-heading-deg");
+    simArr[indicated_slip_skid] = string("/instrumentation/slip-skid-ball/indicated-slip-skid");
+    simArr[indicated_turn_rate] = string("/instrumentation/turn-indicator/indicated-turn-rate");
+    simArr[vertical_speed_indicator_indicated_speed] = string(
+            "/instrumentation/vertical-speed-indicator/indicated-speed-fpm");
+    simArr[flight_aileron] = string("/controls/flight/aileron");
+    simArr[flight_elevator] = string("/controls/flight/elevator");
+    simArr[flight_rudder] = string("/controls/flight/rudder");
+    simArr[flight_flaps] = string("/controls/flight/flaps");
+    simArr[engine_throttle] = string("/controls/engines/engine/throttle");
+    simArr[current_engine_throttle] = string("/controls/engines/current-engine/throttle");
+    simArr[switches_master_avionics] = string("/controls/switches/master-avionics");
+    simArr[switches_starter] = string("/controls/switches/starter");
+    simArr[active_engine_auto_start] = string("/engines/active-engine/auto-start");
+    simArr[flight_speedbrake] = string("/controls/flight/speedbrake");
+    simArr[brake_parking] = string("/sim/model/c172p/brake-parking");
+    simArr[engine_primer] = string("/controls/engines/engine/primer");
+    simArr[current_engine_mixture] = string("/controls/engines/current-engine/mixture");
+    simArr[switches_master_bat] = string("/controls/switches/master-bat");
+    simArr[switches_master_alt] = string("/controls/switches/master-alt");
+    simArr[engine_rpm] = string("/engines/engine/rpm");
 }
 
 bool Server::isTimePassed() {

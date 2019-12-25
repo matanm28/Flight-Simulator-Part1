@@ -23,8 +23,6 @@ private:
 public:
     static SymbolTable *getSymbolTable();
 
-    virtual ~SymbolTable();
-
     //todo: change return type for adders and setters to bool
     //upon success return true otherwise return false
     void addVar(string varName, string sim, string direction, float value);

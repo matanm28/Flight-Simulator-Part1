@@ -11,12 +11,15 @@
 
 class Parser {
     map<string, Command *> mapCommands;
+    map<string, vector<string>> mapFunctions;
 public:
     Parser();
 
-    void CreateMap();
-
     void Parse(vector<string> flyCommands);
+
+    int AddfuncToMap(vector<string>::iterator &iter);
+
+    int FuncCall(vector<string>::iterator &iter);
 
 };
 

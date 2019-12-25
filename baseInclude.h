@@ -4,7 +4,7 @@
 
 #ifndef EX1_BASEINCLUDE_H
 #define EX1_BASEINCLUDE_H
-#define NUM_OF_VARS_ON_XML 23
+#define NUM_OF_VARS_ON_XML 36
 #define MIN_MINUTES 2
 
 

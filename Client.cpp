@@ -31,8 +31,6 @@ void Client::runClient() {
         this->threadVector.push_back(dataSender);
         dataSender->detach();
     }
-
-
 }
 
 bool Client::establishConnection() {

@@ -1,6 +1,6 @@
 openDataServer(5400)
 connectControlClient("127.0.0.1",5402)
-var warp-> sim("/sim/time/warp")
+var warp -> sim("/sim/time/warp")
 var magnetos -> sim("/controls/switches/magnetos")
 var throttle -> sim("/controls/engines/current-engine/throttle")
 var mixture -> sim("/controls/engines/current-engine/mixture")
@@ -46,10 +46,16 @@ Print("let's fly")
 var h0 = heading
 breaks = 0
 throttle = 1
-while alt < 1000 {
-	rudder = (h0 - heading)/50
-	aileron = -roll / 50
+takeoff(var x) {
+   Print(x)
+   Print("I'm here!")
+   while alt < x {
+	rudder = (h0 - heading)/80
+	aileron = -roll / 70
 	elevator = pitch / 50
+    Print(alt)
 	Sleep(250)
+   }
 }
+takeoff(1000)
 Print("done")
