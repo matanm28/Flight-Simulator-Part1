@@ -122,5 +122,5 @@ int Parser::FuncCall(vector<string>::iterator &iter) {
         itFunc++;
     }
     this->Parse(forParse);
-    return 1;
+    return 3;
 }

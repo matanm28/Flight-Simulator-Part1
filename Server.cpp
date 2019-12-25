@@ -16,7 +16,6 @@ void Server::run() {
         thread *receiveData = new thread(&Server::readData, this);
         this->threadVector.push_back(receiveData);
         receiveData->detach();
-        /*this->readData();*/
     }
 }
 
@@ -37,7 +36,7 @@ bool Server::listenAndWait() {
 void Server::readData() {
     string data, exactData;
     char buffer[256];
-    int validRead, pos;
+    int validRead;
     while (true) {
         //reading from client
         bzero(buffer, 256);
@@ -48,7 +47,7 @@ void Server::readData() {
             bzero(buffer, 256);
             currRead = read(this->client_socket, buffer, 256);
             validRead += currRead;
-            data.append(buffer);
+            data.append(buffer, currRead);
         }
         exactData = data.substr(0, data.find('\n'));
         data.erase(0, data.find('\n') + 1);
@@ -58,18 +57,6 @@ void Server::readData() {
         //std::cout << exactData << std::endl;
 
     }
-}
-
-bool Server::checkSimStatus(int index) {
-    if (!this->simBoolArr[index]) {
-        string key;//= SymbolTable::getSymbolTable()->varExists(this->simArr[index]);
-        if (!key.empty()) {
-            this->simArr[index] = key;
-            this->simBoolArr[index] = true;
-            return true;
-        }
-    }
-    return false;
 }
 
 bool Server::updateSymbolTable(const vector<float> &myNums) {
@@ -188,13 +175,4 @@ void Server::buildSimStringArray() {
     simArr[engine_rpm] = string("/engines/engine/rpm");
 }
 
-bool Server::isTimePassed() {
-    if (!this->timePassed) {
-        auto now = chrono::high_resolution_clock::now();
-        auto duration = chrono::duration_cast<chrono::minutes>(now - this->connectionStartTime);
-        if (duration.count() > MIN_MINUTES) {
-            this->timePassed = true;
-        }
-    }
-    return this->timePassed;
-}
+

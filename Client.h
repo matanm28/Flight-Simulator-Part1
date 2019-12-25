@@ -16,6 +16,7 @@
 #include "Var.h"
 #include "SymbolTable.h"
 
+typedef chrono::time_point<chrono::high_resolution_clock> runTime;
 
 class Client {
 private:
@@ -23,6 +24,8 @@ private:
     string destIp;
     sockaddr_in address;
     vector<thread *> threadVector;
+    bool timePassed = false;
+    runTime firstConnectionStartTime;
 
 public:
     Client(string ip, int port);
@@ -40,6 +43,8 @@ private:
     static string turnVarToData(Var *var);
 
     static vector<string> createCommandsVector();
+
+    bool isTimePassed();
 };
 
 

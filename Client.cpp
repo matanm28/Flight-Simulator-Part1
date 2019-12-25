@@ -35,14 +35,18 @@ void Client::runClient() {
 
 bool Client::establishConnection() {
     int addressLength = sizeof(this->address);
-    bool connectionEstablished = false;
+    bool connectionEstablished = false, reportError = true;
     //todo: add time dependency
     while (!connectionEstablished) {
         int is_connect = connect(this->clientSocket, (struct sockaddr *) &(this->address), (socklen_t) addressLength);
         if (is_connect == -1) {
-            std::cerr << "Could not connect to host server" << std::endl;
+            if (reportError) {
+                std::cerr << "Could not connect to host server" << std::endl;
+                reportError = false;
+            }
         } else {
             std::cout << "Client is now connected to server" << std::endl;
+            this->firstConnectionStartTime =
             connectionEstablished = true;
         }
     }
@@ -80,3 +84,13 @@ string Client::turnVarToData(Var *var) {
     return data;
 }
 
+bool Client::isTimePassed() {
+    if (!this->timePassed) {
+        auto now = chrono::high_resolution_clock::now();
+        auto duration = chrono::duration_cast<chrono::minutes>(now - this->connectionStartTime);
+        if (duration.count() > MIN_MINUTES) {
+            this->timePassed = true;
+        }
+    }
+    return this->timePassed;
+}

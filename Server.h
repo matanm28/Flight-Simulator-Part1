@@ -46,13 +46,9 @@ private:
 
     bool updateSymbolTable(float value, int varIndex);
 
-    bool checkSimStatus(int index);
-
     static vector<string> splitString(string source, const string &delimiter);
 
     vector<float> convertToNums(vector<string> myVars);
-
-    bool isTimePassed();
 };
 
 
