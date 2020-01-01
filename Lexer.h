@@ -5,11 +5,12 @@
 #ifndef EX1_LEXER_H
 #define EX1_LEXER_H
 
-#include <stdio.h>
 #include <string>
 #include <fstream>
 #include <list>
 #include <vector>
+#include <stdio.h>
+#include <iostream>
 
 using namespace std;
 
@@ -18,8 +19,6 @@ class Lexer {
     vector<string> commandsList;
 public:
     Lexer(const string &path);
-
-    vector<string> splitString(string source, const string &delimiter);
 
     string subString(string source, string del_1, string del_2);
 
@@ -31,11 +30,9 @@ public:
 
     void lexLine(ifstream &in_file, string line);
 
-    bool funcOrNot(string source);
-
-    string eraseParameters(string source);
-
     void func(ifstream &in_file, string line);
+
+    string lStrip(string source);
 
 private:
     string trimChar(string source, const char c);
