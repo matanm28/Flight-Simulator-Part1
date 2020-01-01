@@ -32,6 +32,8 @@ public:
 
     void runClient();
 
+    static string turnVarToData(Var *var);
+
 private:
     //functions:
     static int createSocket();
@@ -40,7 +42,7 @@ private:
 
     void sendData();
 
-    static string turnVarToData(Var *var);
+    void sendDataWithQueue();
 
     static vector<string> createCommandsVector();
 

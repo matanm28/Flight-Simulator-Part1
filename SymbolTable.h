@@ -17,6 +17,7 @@ private:
     mutex nameToVarLock;
     map<string, Var *> nameToVar;
     map<string, Var *> simToVar;
+    queue<string> clientCommands;
     bool guiStarted = false;
 
     SymbolTable();
@@ -35,6 +36,8 @@ public:
     void setVarByName(string varName, float value);
 
     void setVarBySim(string sim, float value);
+
+    queue<string> *getClientCommands();
 
     vector<Var *> getNameToVar();
 

@@ -34,6 +34,7 @@ void Var::setValue(float value) {
     Var::value = value;
     if (this->direction == "->") {
         this->newValue = true;
+
     }
 }
 

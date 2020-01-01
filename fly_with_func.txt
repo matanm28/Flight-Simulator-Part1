@@ -52,6 +52,13 @@ Print("let's fly")
 var h0 = heading
 breaks = 0
 throttle = 1
+rudder = -0.5
+if 8>2{
+    Print("works !")
+}
+if 2 >8 {
+    Print("you suck - go fix")
+}
 takeoff(var x) {
    Print(x)
    Print(" w o w ! !")

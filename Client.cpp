@@ -27,7 +27,7 @@ int Client::createSocket() {
 
 void Client::runClient() {
     if (this->establishConnection()) {
-        thread *dataSender = new thread(&Client::sendData, this);
+        thread *dataSender = new thread(&Client::sendDataWithQueue, this);
         this->threadVector.push_back(dataSender);
         dataSender->detach();
     }
@@ -37,7 +37,6 @@ bool Client::establishConnection() {
     int addressLength = sizeof(this->address);
     bool connectionEstablished = false, reportError = true;
     this->firstConnectionStartTime = chrono::high_resolution_clock::now();
-    //todo: add time dependency
     while (!(connectionEstablished || this->getTimePassed())) {
         int is_connect = connect(this->clientSocket, (struct sockaddr *) &(this->address), (socklen_t) addressLength);
         if (is_connect == -1) {
@@ -67,6 +66,23 @@ void Client::sendData() {
             } else {
                 std::cout << data.substr(0, data.find('\r')) + " sent to server" << std::endl;
             }
+        }
+    }
+}
+
+void Client::sendDataWithQueue() {
+    //todo: document
+    while (true) {
+        queue<string> *clientCommands = SymbolTable::getSymbolTable()->getClientCommands();
+        while (!clientCommands->empty()) {
+            string data = clientCommands->front();
+            clientCommands->pop();
+            int is_sent = send(this->clientSocket, data.c_str(), data.size(), 0);
+            if (is_sent == -1) {
+                std::cout << "Error sending message" << std::endl;
+            } /*else {
+                std::cout << data.substr(0, data.find('\r')) + " sent to server" << std::endl;
+            }*/
         }
     }
 }
