@@ -71,6 +71,7 @@ void Client::sendData() {
 }
 
 void Client::sendDataWithQueue() {
+    //todo: document
     while (true) {
         queue<string> *clientCommands = SymbolTable::getSymbolTable()->getClientCommands();
         while (!clientCommands->empty()) {

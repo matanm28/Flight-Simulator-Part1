@@ -47,7 +47,7 @@ void SymbolTable::setVarByName(string varName, float value) {
         Var *var = this->nameToVar.find(varName)->second;
         var->setValue(value);
         if (var->getDirection() == "->") {
-            clientCommands.push(Client::turnVarToData(var));
+            this->clientCommands.push(Client::turnVarToData(var));
         }
     }
     this->nameToVarLock.unlock();
