@@ -4,7 +4,7 @@
 
     1) Establishing a TCP/IP connection with the simulator.
   
-    2)	 Writing commands for the plane flight.
+    2) Writing commands for the plane flight.
 
 ## Extra Details
 This is a UAV control code interpreter.
@@ -30,10 +30,10 @@ And this is where:
 ![](flight-gear%20menu.png)
 
 ## Compiling
-You should compile this program using the added makefile in this repository using the following command:
+You should compile this program using the added makefile in this repository with the following command:
 > make all
 
-Alternatively, if can download source.txt from this repository and use the following command:
+Alternatively, you can download source.txt from this repository and use the following command:
 > make compile
 
 ## Running
