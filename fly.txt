@@ -12,7 +12,7 @@ var primer -> sim("/controls/engines/engine/primer")
 var starter -> sim("/controls/switches/starter")
 var autostart -> sim("/engines/active-engine/auto-start")
 var breaks -> sim("/controls/flight/speedbrake")
-var heading <- sim("/instrumentation/heading-indicator/offset-deg")
+var heading <- sim("/instrumentation/heading-indicator/indicated-heading-deg")
 var airspeed <- sim("/instrumentation/airspeed-indicator/indicated-speed-kt")
 var roll <- sim("/instrumentation/attitude-indicator/indicated-roll-deg")
 var pitch <- sim("/instrumentation/attitude-indicator/internal-pitch-deg")
@@ -47,7 +47,7 @@ var h0 = heading
 breaks = 0
 throttle = 1
 while alt < 1000 {
-	rudder = (h0 - heading)/80
+	rudder = (h0 - heading)/80 - 0.5
 	aileron = -roll / 70
 	elevator = pitch / 50
 	Sleep(250)

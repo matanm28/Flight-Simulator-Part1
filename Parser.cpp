@@ -33,7 +33,7 @@ Parser::Parser() {
 }
 
 void Parser::Parse(vector<string> flyCommands) {
-    int index = 0;
+    unsigned index = 0;
     auto iter = flyCommands.begin();
     while (index < flyCommands.size()) {
         Command *c;

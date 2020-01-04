@@ -5,7 +5,10 @@
 #ifndef EX3_COMMAND_H
 #define EX3_COMMAND_H
 
-#include "../baseInclude.h"
+#include <vector>
+#include <string>
+
+using namespace std;
 
 class Command {
 public:

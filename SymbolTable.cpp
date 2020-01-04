@@ -40,7 +40,6 @@ void SymbolTable::addVar(string varName, float value) {
     this->nameToVarLock.unlock();
 }
 
-
 void SymbolTable::setVarByName(string varName, float value) {
     this->nameToVarLock.lock();
     if (this->nameToVar.find(varName) != this->nameToVar.cend()) {
@@ -51,9 +50,6 @@ void SymbolTable::setVarByName(string varName, float value) {
         }
     }
     this->nameToVarLock.unlock();
-    if (!this->guiStarted) {
-        this->guiStarted = true;
-    }
 }
 
 void SymbolTable::setVarBySim(string sim, float value) {
@@ -107,10 +103,6 @@ vector<Var *> SymbolTable::getNameToVar() {
         varVector.push_back(node.second);
     }
     return varVector;
-}
-
-bool SymbolTable::getGuiStarted() {
-    return this->guiStarted;
 }
 
 queue<string> *SymbolTable::getClientCommands() {

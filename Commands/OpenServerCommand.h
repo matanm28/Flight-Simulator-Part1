@@ -6,7 +6,6 @@
 #define EX1_OPENSERVERCOMMAND_H
 
 #include "Command.h"
-#include "../baseInclude.h"
 #include "../Server.h"
 
 class OpenServerCommand : public Command {

@@ -4,6 +4,7 @@
 
 #ifndef EX1_CLIENT_H
 #define EX1_CLIENT_H
+#define MAX_SECONDS_FOR_CONNECTION 120
 
 #include <sys/socket.h>
 #include <strings.h>
@@ -12,7 +13,8 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "baseInclude.h"
+#include <vector>
+#include <queue>
 #include "Var.h"
 #include "SymbolTable.h"
 

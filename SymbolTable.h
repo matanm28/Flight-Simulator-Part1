@@ -5,7 +5,7 @@
 #ifndef EX1_SYMBOLTABLE_H
 #define EX1_SYMBOLTABLE_H
 
-#include "baseInclude.h"
+
 #include "Commands/Command.h"
 #include "Var.h"
 #include "Client.h"
@@ -18,7 +18,6 @@ private:
     map<string, Var *> nameToVar;
     map<string, Var *> simToVar;
     queue<string> clientCommands;
-    bool guiStarted = false;
 
     SymbolTable();
 

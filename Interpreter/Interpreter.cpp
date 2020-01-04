@@ -72,6 +72,7 @@ Expression *Interpreter::stringToExpression(const string expString) {
     } catch (exception z) {
         SymbolTable *st = SymbolTable::getSymbolTable();
         Var v = st->getVar(expString);
+        //todo add exception
         return new Variable(expString, v.getValue());
     }
 }

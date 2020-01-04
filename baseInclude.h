@@ -5,7 +5,6 @@
 #ifndef EX1_BASEINCLUDE_H
 #define EX1_BASEINCLUDE_H
 #define NUM_OF_VARS_ON_XML 36
-#define MAX_SECONDS_FOR_CONNECTION 120
 
 
 #include <cstdio>

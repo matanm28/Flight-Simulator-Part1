@@ -168,14 +168,14 @@ void Lexer::func(ifstream &in_file, string line) {
 }
 
 string Lexer::lStrip(string source) {
-    int i;
+    unsigned i;
     string output;
     for (i = 0; i < source.size(); i++) {
         if (source[i] != ' ' && source[i] != '\t') {
             break;
         }
     }
-    for (int j = i; j < source.size(); j++) {
+    for (unsigned j = i; j < source.size(); j++) {
         output += source[j];
     }
     return output;
@@ -183,7 +183,7 @@ string Lexer::lStrip(string source) {
 
 string Lexer::trimChar(string source, const char c) {
     string output;
-    for (int i = 0; i < source.size(); i++) {
+    for (unsigned i = 0; i < source.size(); i++) {
         if (source[i] != c) {
             output += source[i];
         }

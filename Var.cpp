@@ -12,9 +12,7 @@ Var::Var(float value, const string &sim, const string &direction) {
 
 Var::Var(const string &sim, const string &direction) : Var(DEFAULT_VALUE, sim, direction) {}
 
-Var::Var(const Var &v) : Var(v.value, v.sim, v.direction) {
-
-}
+Var::Var(const Var &v) : Var(v.value, v.sim, v.direction) {}
 
 Var::Var(float value) : Var(value, "", "=") {}
 

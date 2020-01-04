@@ -28,7 +28,7 @@ if 8 < 4 {
 Print("oh no")
 }
 Print("waiting 40 seconds for gui")
-Sleep(120000)
+Sleep(40000)
 Print("let's start")
 warp = 32000
 Sleep(1000)
