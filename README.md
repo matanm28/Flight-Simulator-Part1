@@ -27,7 +27,7 @@ Our interpreter works in two directions:
         
 And this is where:
 
-![](flight-gear%20manu.png)
+![](flight-gear%20menu.png)
 
 ## Compiling
 You should compile this program using the added makefile in this repository using the following command:
