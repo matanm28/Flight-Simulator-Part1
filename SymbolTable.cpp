@@ -7,7 +7,7 @@
 SymbolTable *SymbolTable::unifiedSymbolTable = nullptr;
 
 SymbolTable::SymbolTable() {
-    //empty or not?
+    //nothing
 }
 
 SymbolTable *SymbolTable::getSymbolTable() {
@@ -18,6 +18,7 @@ SymbolTable *SymbolTable::getSymbolTable() {
 }
 
 void SymbolTable::addVar(string varName, string sim, string direction, float value) {
+    //we use a specific mutex to lock a map, this creates a "global" lock
     Var *var = new Var(value, sim, direction);
     this->nameToVarLock.lock();
     this->nameToVar.insert({varName, var});
@@ -83,18 +84,6 @@ Var SymbolTable::getVarBySim(string sim) {
         this->simToVarLock.unlock();
         return NULL;
     }
-}
-
-string SymbolTable::varExists(string sim) {
-    this->simToVarLock.lock();
-    for (auto node:this->nameToVar) {
-        if (node.second->getSim() == sim) {
-            this->nameToVarLock.unlock();
-            return node.first;
-        }
-    }
-    this->simToVarLock.unlock();
-    return "";
 }
 
 vector<Var *> SymbolTable::getNameToVar() {

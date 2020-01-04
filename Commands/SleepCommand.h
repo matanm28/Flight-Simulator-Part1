@@ -6,7 +6,8 @@
 #define EX1_SLEEPCOMMAND_H
 
 #include "Command.h"
-#include "../baseInclude.h"
+#include <chrono>
+#include <thread>
 
 class SleepCommand : public Command {
 public:

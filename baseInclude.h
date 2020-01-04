@@ -4,7 +4,6 @@
 
 #ifndef EX1_BASEINCLUDE_H
 #define EX1_BASEINCLUDE_H
-#define NUM_OF_VARS_ON_XML 36
 
 
 #include <cstdio>
@@ -18,7 +17,7 @@
 #include <mutex>
 #include <thread>
 #include <strings.h>
-#include <chrono>
+
 #include <queue>
 
 

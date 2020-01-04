@@ -9,7 +9,7 @@
 #include <fstream>
 #include <list>
 #include <vector>
-#include <stdio.h>
+#include <cstdio>
 #include <iostream>
 
 using namespace std;

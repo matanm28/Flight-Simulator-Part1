@@ -37,7 +37,6 @@ void Server::readData() {
     string data, exactData, prevData;
     char buffer[BUFFER_SIZE];
     int validRead;
-    //this->flushBuffer();
     while (true) {
         //reading from client
         bzero(buffer, BUFFER_SIZE);
@@ -55,10 +54,6 @@ void Server::readData() {
         vector<string> myVars = splitString(exactData, ",");
         vector<float> varsNums = this->convertToNums(myVars);
         this->updateSymbolTable(varsNums);
-        /*prevData = exactData;
-        while (prevData == data.substr(0, data.find('\n'))){
-            data.erase(0, data.find('\n') + 1);
-        }*/
         //std::cout << exactData << std::endl;
 
     }
@@ -140,17 +135,8 @@ vector<string> Server::splitString(string source, const string &delimiter) {
 
 }
 
-void Server::flushBuffer() {
-    char buffer[2048];
-    int valRead = 2048;
-    while (!SymbolTable::getSymbolTable()->getGuiStarted() ||
-           SymbolTable::getSymbolTable()->getVarBySim(this->simArr[engine_rpm]).getValue() < 750) {
-        //reading from client and not using
-        valRead = read(this->client_socket, buffer, 2048);
-    }
-}
-
 void Server::buildSimStringArray() {
+    //make and array of sim's based on generic_small.xml - Hard Coded
     simArr[airspeed_indicator] = string("/instrumentation/airspeed-indicator/indicated-speed-kt");
     simArr[time_warp] = string("/sim/time/warp");
     simArr[switches_magnetos] = string("/controls/switches/magnetos");

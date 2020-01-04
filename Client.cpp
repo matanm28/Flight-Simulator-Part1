@@ -71,9 +71,9 @@ void Client::sendData() {
 }
 
 void Client::sendDataWithQueue() {
-    //todo: document
     while (true) {
         queue<string> *clientCommands = SymbolTable::getSymbolTable()->getClientCommands();
+        //send commands from the queue to FlightGear
         while (!clientCommands->empty()) {
             string data = clientCommands->front();
             clientCommands->pop();

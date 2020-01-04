@@ -4,11 +4,10 @@
 
 #ifndef EX1_SERVER_H
 #define EX1_SERVER_H
-#define IP "127.0.0.1"
 #define DEFAULT_PORT 5400
 #define BUFFER_SIZE 256
+#define NUM_OF_VARS_ON_XML 36
 
-#include "baseInclude.h"
 #include "SymbolTable.h"
 #include "Commands/DefineVarCommand.h"
 #include <sys/socket.h>
@@ -51,7 +50,6 @@ private:
 
     vector<float> convertToNums(vector<string> myVars);
 
-    void flushBuffer();
 };
 
 

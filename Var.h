@@ -6,8 +6,10 @@
 #define EX1_VAR_H
 #define DEFAULT_VALUE 0
 
-#include "baseInclude.h"
+#include <string>
 #include "Interpreter/Expression.h"
+
+using namespace std;
 
 class Var : public Expression {
 private:

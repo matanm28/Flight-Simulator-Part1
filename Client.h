@@ -15,6 +15,8 @@
 #include <arpa/inet.h>
 #include <vector>
 #include <queue>
+#include <chrono>
+#include <thread>
 #include "Var.h"
 #include "SymbolTable.h"
 
