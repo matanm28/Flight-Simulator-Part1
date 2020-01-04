@@ -1,3 +1,4 @@
+
 # Flight Gear Interpreter
 
 "Flight-Gear: Interpreter"- First Mile-Stone main achievements:
@@ -30,11 +31,16 @@ And this is where:
 ![](flight-gear%20menu.png)
 
 ## Compiling
-You should compile this program using the added makefile in this repository with the following command:
+We provide a _makefile_ to compile this project, you should use it!
+To properly use this _makefile_ you should download the repository content without changing any files location.
+
+In case you had to change the folder's path, make sure the _makefile_ resides in the outer folder alongside _main.cpp_.
+Compile this program with the following command:
 > make all
 
-Alternatively, you can download source.txt from this repository and use the following command:
+Alternatively (if you didn't change folders and files location), you can download source.txt from this repository and use the following command:
 > make compile
+notice that source.txt should reside in the same folder as the _makefile_
 
 ## Running
 The interpreter receives a single argument which is the path of a text file containing the code you'll want to run.
@@ -46,8 +52,10 @@ After compiling you can run the interpreter with our provided _makefile_ using t
 2. To run the provided _fly_with_func.txt_ file use: 
 >make runFunc
 
+3. To run with your own writen code use:
+> ./a.out _your_code_file_name.txt_
+
 ## Syntax
 The syntax is quite intuitive with some restrictions:
 1. Conditions can only contain a single boolean expression.
 2. Conditions cannot be used within the while loop.
-
