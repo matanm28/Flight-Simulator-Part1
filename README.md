@@ -40,6 +40,7 @@ Compile this program with the following command:
 
 Alternatively (if you didn't change folders and files location), you can download source.txt from this repository and use the following command:
 > make compile
+
 notice that source.txt should reside in the same folder as the _makefile_
 
 ## Running
