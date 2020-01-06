@@ -8,7 +8,15 @@
 int ConnectCommand::execute(vector<string>::iterator &iter) {
     string ip = *iter;
     iter++;
-    int port = stoi(*iter);
+    Interpreter interpreter;
+    int port;
+    try {
+        port = (int) interpreter.interpret(*iter)->calculate();
+    } catch (char *c) {
+        port = DEFAULT_CLIENT_PORT;
+    } catch (exception *e) {
+        port = DEFAULT_CLIENT_PORT;
+    }
     Client *client = new Client(ip, port);
     client->runClient();
     iter++;

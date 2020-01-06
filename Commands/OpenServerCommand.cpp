@@ -6,9 +6,12 @@
 
 
 int OpenServerCommand::execute(vector<string>::iterator &iter) {
+    Interpreter interpreter;
     int port;
     try {
-        port = stoi(*iter);
+        port = (int) interpreter.interpret(*iter)->calculate();
+    } catch (char *c) {
+        port = DEFAULT_PORT;
     } catch (exception *e) {
         port = DEFAULT_PORT;
     }

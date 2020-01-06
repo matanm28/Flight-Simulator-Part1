@@ -4,6 +4,7 @@
 
 #ifndef EX1_CONNECTCOMMAND_H
 #define EX1_CONNECTCOMMAND_H
+#define DEFAULT_CLIENT_PORT 5402
 
 #include "Command.h"
 #include "../Client.h"

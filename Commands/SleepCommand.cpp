@@ -6,8 +6,11 @@
 
 int SleepCommand::execute(vector<string>::iterator &iter) {
     int time;
+    Interpreter interpreter;
     try {
-        time = stoi(*iter);
+        time = (int) interpreter.interpret(*iter)->calculate();
+    } catch (char *c) {
+        time = 0;
     } catch (exception *e) {
         time = 0;
     }

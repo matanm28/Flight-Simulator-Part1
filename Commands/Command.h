@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <string>
+#include "../Interpreter/Interpreter.h"
 
 using namespace std;
 
